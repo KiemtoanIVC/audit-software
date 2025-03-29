@@ -1,0 +1,6 @@
+# Tạo giao diện cho từng biểu mẫu
+class A110View(QWidget):
+    pass
+
+class A120View(QWidget):
+    pass 

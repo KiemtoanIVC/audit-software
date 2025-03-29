@@ -1,0 +1,94 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Project Overview: Chương Trình Kiểm Toán
+
+## 1. Mục tiêu Dự án
+
+Chương trình kiểm toán nhằm hỗ trợ quá trình kiểm soát khâu đầu ra của quy trình kiểm toán, đảm bảo rằng các kiểm toán viên (KTV) đã hoàn thiện đầy đủ hồ sơ theo danh sách quy định trước khi phát hành báo cáo kiểm toán chính thức. Phần mềm được xây dựng trên nền tảng Python và PyQt6, với các mục tiêu chính:
+- Quản lý và lưu trữ thông tin kiểm toán (Job) trên hệ thống file cục bộ.
+- Tích hợp các biểu mẫu kiểm toán theo các giai đoạn: Lập kế hoạch, Thực hiện, Phát hành báo cáo và Đề nghị soát xét.
+- Cung cấp các tiện ích hỗ trợ (như: load dữ liệu XML, chọn mẫu kiểm toán, tính khấu hao tài sản cố định, trích xuất dữ liệu từ PDF).
+
+## 2. Kiến trúc Dự án
+
+Dự án tuân theo các nguyên tắc Clean Architecture và Domain-Driven Design, với sự phân chia rõ ràng giữa các tầng sau:
+AuditApp/ ├── Application/
+│ ├── Modules/ # Các module nghiệp vụ: Tạo/Mở Job, Mẫu biểu kiểm toán, Tiện ích │ ├── Services/ # Các dịch vụ xử lý nghiệp vụ (ví dụ: load dữ liệu, chọn mẫu) │ └── Utilities/ # Các tiện ích hỗ trợ (xử lý file, kết xuất báo cáo) ├── Domain/
+│ ├── Entities/ # Các entity liên quan đến hồ sơ kiểm toán, Job, Biểu mẫu, Tài liệu │ ├── ValueObjects/ # Các đối tượng giá trị (trạng thái biểu mẫu, thông tin job) │ └── Exceptions/ # Các ngoại lệ nghiệp vụ ├── Infrastructure/
+│ ├── Persistence/ # Quản lý lưu trữ dữ liệu (file cấu hình, dữ liệu job) │ ├── FileManagement/ # Xử lý các thao tác file (upload, download, kiểm tra phiên bản) │ └── Integration/ # Các tích hợp phụ trợ nếu cần └── UI/
+├── PyQt6/ # Giao diện người dùng được xây dựng bằng PyQt6 │ ├── MainWindow.py # Cửa sổ chính với các tab tương ứng với các giai đoạn kiểm toán │ ├── Tabs/ # Các tab: Tạo/Mở Job, Mẫu biểu kiểm toán, Tiện ích, Báo cáo │ └── Components/ # Các widget, form nhập liệu và thành phần UI khác └── Resources/ # Các file mẫu biểu, icon, tài liệu hướng dẫn
+
+## 3. Các Module Chính và Chức Năng
+
+### 3.1. Module Tạo/Mở Job
+- **Chức năng:** Tạo mới hoặc mở job kiểm toán dựa trên thông tin khách hàng, hợp đồng, kỳ kiểm toán, ngành nghề…
+- **Tính năng chính:**
+  - Nhập thông tin ban đầu: Tên khách hàng, số hợp đồng, ngày hợp đồng, kỳ kiểm toán, ngành nghề.
+  - Sinh tự động cấu trúc thư mục cho job trên hệ thống file cục bộ (ví dụ: thư mục riêng cho từng job, chứa các thư mục “Mẫu biểu”, “Dữ liệu”, “Bằng chứng”).
+  - Cho phép mở lại job đã tồn tại và tải thông tin đã lưu.
+
+### 3.2. Module Mẫu Biểu Kiểm Toán
+- **Chức năng:** Quản lý các biểu mẫu kiểm toán theo giai đoạn:
+  - **Lập kế hoạch:** Biểu mẫu A110, A120, A230, A260, A270, A271, A272.
+  - **Thực hiện:** Biểu mẫu A510, A710, A810 và lưu trữ các bằng chứng kiểm toán quan trọng.
+  - **Phát hành Báo cáo:** Biểu mẫu B410, B440.
+  - **Đề nghị soát xét:** Form đề nghị phát hành với tính năng tự động cập nhật tiến độ.
+- **Tính năng chính:**
+  - Cho phép nhập, chỉnh sửa, lưu và đánh dấu trạng thái “Hoàn thành” cho từng biểu mẫu.
+  - Kiểm tra tính đầy đủ của các biểu mẫu trước khi cho phép gửi đề nghị soát xét.
+
+### 3.3. Module Tiện Ích
+- **Chức năng:** Hỗ trợ xử lý dữ liệu và các tác vụ phụ trợ cho quy trình kiểm toán:
+  - Load dữ liệu chung từ file XML có cấu trúc cố định (BCTC, bảng kê chứng từ…).
+  - Lựa chọn mẫu kiểm toán dựa trên các tham số nhập vào.
+  - Tính toán khấu hao tài sản cố định.
+  - Trích xuất dữ liệu từ PDF (ví dụ: C12) sang Excel.
+  - Quản lý danh sách các file mẫu kiểm toán, giúp người dùng truy cập và sử dụng nhanh chóng.
+
+### 3.4. Module Phát Hành & Đề Nghị Soát Xét
+- **Chức năng:** Tổng hợp kết quả kiểm toán và chuẩn bị báo cáo cuối cùng:
+  - Tổng hợp kết quả kiểm toán từ các biểu mẫu (B410).
+  - Soạn thảo thư giải trình của Ban Giám đốc (B440).
+  - Kiểm tra trạng thái hoàn thành của tất cả biểu mẫu; chỉ cho phép gửi đề nghị soát xét nếu mọi phần đều hoàn thành.
+  - Cho phép xuất báo cáo kiểm toán (Excel/PDF) từ dữ liệu đã lưu.
+
+## 4. Quy Trình Làm Việc
+
+1. **Tạo/Mở Job:**
+   - Người dùng khởi chạy ứng dụng, tạo job mới hoặc mở job đã có thông qua giao diện.
+   - Ứng dụng tự động tạo cấu trúc thư mục cho job trên hệ thống file cục bộ, lưu trữ tất cả dữ liệu liên quan đến cuộc kiểm toán.
+
+2. **Lập Kế Hoạch Kiểm Toán:**
+   - Kiểm toán viên nhập thông tin vào các biểu mẫu Lập kế hoạch (A110, A120, …) trực tiếp trên giao diện PyQt6.
+   - Dữ liệu được lưu trữ cục bộ, cho phép các thành viên trong nhóm theo dõi tiến độ.
+
+3. **Thực Hiện Kiểm Toán & Sử Dụng Tiện Ích:**
+   - Trong giai đoạn Thực hiện, người dùng sử dụng các tiện ích (load dữ liệu, chọn mẫu, tính khấu hao, trích xuất PDF) để hỗ trợ nhập liệu và phân tích.
+   - Kết quả được cập nhật vào các biểu mẫu Thực hiện (A510, A710, A810).
+
+4. **Phát Hành Báo Cáo & Đề Nghị Soát Xét:**
+   - Sau khi hoàn thiện các biểu mẫu, người dùng tổng hợp kết quả kiểm toán (B410) và soạn thảo thư giải trình (B440).
+   - Hệ thống tự động kiểm tra trạng thái của tất cả các biểu mẫu; chỉ cho phép gửi đề nghị soát xét nếu mọi phần đều hoàn thành.
+   - Báo cáo cuối cùng được kết xuất và lưu trữ cục bộ.
+
+## 5. Ưu Điểm của Kiến Trúc & Quy Trình
+
+- **Phối hợp & Đồng Bộ:**  
+  - Tất cả dữ liệu và tài liệu được lưu trữ cục bộ trong cấu trúc thư mục rõ ràng, giúp các thành viên dễ dàng truy cập và chia sẻ thông tin.
+  
+- **Quản lý Phiên bản:**  
+  - Hệ thống có thể tích hợp cơ chế kiểm soát phiên bản đơn giản (ví dụ: lưu trữ file theo tên và ngày cập nhật) để theo dõi các thay đổi.
+  
+- **Giao Diện Trực Quan:**  
+  - Sử dụng PyQt6 tạo giao diện dễ sử dụng với các tab chức năng rõ ràng, giúp kiểm toán viên làm việc hiệu quả.
+  
+- **Tính Mở Rộng & Bảo Trì:**  
+  - Kiến trúc phân tầng rõ ràng cho phép dễ dàng mở rộng tính năng (ví dụ: thêm tiện ích mới, cải thiện biểu mẫu) và bảo trì hệ thống theo thời gian.
+
+---
+
+Với tài liệu tổng quan này, các thành viên trong dự án có thể nắm được cấu trúc, các module chính và quy trình làm việc của chương trình kiểm toán, từ đó xây dựng các tài liệu kỹ thuật chi tiết khác (technical design, task breakdown, implementation rules) để triển khai phần mềm một cách hiệu quả.
+

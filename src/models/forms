@@ -1,0 +1,6 @@
+# Tạo các class cho từng loại biểu mẫu
+class A110Form(AuditForm):
+    pass
+
+class A120Form(AuditForm):
+    pass 

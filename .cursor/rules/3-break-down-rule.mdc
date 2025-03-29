@@ -1,0 +1,124 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Task Breakdown: Chương Trình Kiểm Toán
+
+## Module 1: Job Management
+
+- [ ] **Task 1.1: Thiết kế giao diện tạo/mở Job**
+  - [ ] Tạo form nhập thông tin ban đầu: Tên khách hàng, Số hợp đồng, Ngày hợp đồng, Kỳ kiểm toán, Ngành nghề.
+  - [ ] Thiết lập giao diện danh sách Job đã tạo để chọn mở.
+  
+- [ ] **Task 1.2: Triển khai logic tạo Job**
+  - [ ] Xây dựng hàm tạo cấu trúc thư mục cho Job (bao gồm các thư mục “Mẫu biểu”, “Dữ liệu”, “Bằng chứng”).
+  - [ ] Lưu thông tin Job vào file cấu hình (ví dụ: JSON) trong thư mục Job.
+
+- [ ] **Task 1.3: Triển khai chức năng mở Job**
+  - [ ] Đọc thông tin từ file cấu hình của Job đã lưu.
+  - [ ] Hiển thị thông tin Job trên giao diện để người dùng có thể tiếp tục làm việc.
+
+## Module 2: Audit Forms (Mẫu Biểu Kiểm Toán)
+
+### Giai đoạn Lập Kế Hoạch
+
+- [ ] **Task 2.1: Phát triển biểu mẫu A110**
+  - [ ] Tạo giao diện nhập liệu cho biểu mẫu A110 (Chấp nhận khách hàng mới & đánh giá rủi ro hợp đồng).
+  - [ ] Triển khai lưu trữ dữ liệu biểu mẫu và đánh dấu trạng thái "Hoàn thành".
+
+- [ ] **Task 2.2: Phát triển biểu mẫu A120**
+  - [ ] Tạo giao diện nhập liệu cho biểu mẫu A120 (Chấp nhận, duy trì khách hàng cũ & đánh giá rủi ro hợp đồng).
+  - [ ] Triển khai lưu trữ dữ liệu và trạng thái của biểu mẫu.
+
+- [ ] **Task 2.3: Phát triển biểu mẫu A230**
+  - [ ] Tạo giao diện soạn thảo thư gửi khách hàng về kế hoạch kiểm toán.
+  - [ ] Triển khai chức năng lưu và xuất file (nếu cần).
+
+- [ ] **Task 2.4: Phát triển biểu mẫu A260, A270, A271, A272**
+  - [ ] Tạo giao diện nhập liệu cho các biểu mẫu liên quan đến độc lập của nhóm kiểm toán và các yếu tố phụ thuộc.
+  - [ ] Triển khai lưu trữ và cập nhật trạng thái của các biểu mẫu này.
+
+### Giai đoạn Thực Hiện
+
+- [ ] **Task 2.5: Phát triển biểu mẫu A510**
+  - [ ] Xây dựng giao diện nhập liệu cho phân tích sơ bộ báo cáo tài chính.
+  - [ ] Triển khai lưu dữ liệu và kiểm tra tính hợp lệ của thông tin nhập.
+
+- [ ] **Task 2.6: Phát triển biểu mẫu A710**
+  - [ ] Tạo giao diện nhập liệu để tính Mức trọng yếu (các thông số tài chính cần thiết).
+  - [ ] Triển khai logic tính toán mức trọng yếu và lưu kết quả.
+
+- [ ] **Task 2.7: Phát triển biểu mẫu A810**
+  - [ ] Tạo giao diện đánh giá rủi ro và thiết kế thủ tục kiểm toán.
+  - [ ] Triển khai chức năng lưu trữ và cập nhật thủ tục kiểm toán được đề xuất.
+
+- [ ] **Task 2.8: Xây dựng chức năng lưu trữ bằng chứng kiểm toán**
+  - [ ] Cho phép upload, lưu trữ file chứng từ (hợp đồng, hóa đơn, biên bản…).
+  - [ ] Liên kết các file chứng từ với biểu mẫu tương ứng.
+
+### Giai đoạn Phát Hành & Đề Nghị Soát Xét
+
+- [ ] **Task 2.9: Phát triển biểu mẫu B410**
+  - [ ] Tạo giao diện tổng hợp kết quả kiểm toán từ các biểu mẫu trước đó.
+  - [ ] Triển khai chức năng xuất báo cáo dưới dạng file Excel.
+
+- [ ] **Task 2.10: Phát triển biểu mẫu B440**
+  - [ ] Tạo giao diện soạn thảo thư giải trình của Ban Giám đốc.
+  - [ ] Triển khai lưu trữ và xuất kết quả (PDF hoặc file khác).
+
+- [ ] **Task 2.11: Xây dựng chức năng kiểm tra trạng thái hoàn thành của biểu mẫu**
+  - [ ] Tích hợp logic kiểm tra tự động trạng thái của tất cả các biểu mẫu.
+  - [ ] Chặn chức năng gửi đề nghị soát xét nếu chưa hoàn thành đầy đủ.
+
+- [ ] **Task 2.12: Phát triển Form Đề Nghị Soát Xét**
+  - [ ] Tạo giao diện đề nghị soát xét, tự động cập nhật tiến độ dựa trên trạng thái của các biểu mẫu.
+  - [ ] Triển khai logic gửi đề nghị soát xét chỉ khi tất cả biểu mẫu đã đạt trạng thái “Hoàn thành.”
+
+## Module 3: Tiện Ích Hỗ Trợ
+
+- [ ] **Task 3.1: Phát triển chức năng Load dữ liệu XML**
+  - [ ] Xây dựng hàm đọc và phân tích file XML có cấu trúc cố định.
+  - [ ] Hiển thị dữ liệu đã load trên giao diện (có thể là bảng dữ liệu).
+
+- [ ] **Task 3.2: Phát triển chức năng Chọn mẫu kiểm toán**
+  - [ ] Triển khai logic chọn mẫu kiểm toán dựa trên tham số (khoảng cách mẫu, ngưỡng sai sót,…).
+  - [ ] Hiển thị danh sách mẫu được chọn và lưu kết quả vào Job.
+
+- [ ] **Task 3.3: Phát triển chức năng Tính toán khấu hao TSCĐ**
+  - [ ] Tạo giao diện nhập liệu cho khấu hao (nguyên giá, thời gian khấu hao, …).
+  - [ ] Triển khai logic tính khấu hao và xuất kết quả ra file Excel hoặc lưu trong hệ thống.
+
+- [ ] **Task 3.4: Phát triển chức năng Trích xuất dữ liệu từ PDF**
+  - [ ] Xây dựng hàm chuyển đổi dữ liệu (ví dụ: C12) từ file PDF sang Excel.
+  - [ ] Hiển thị kết quả chuyển đổi và cho phép lưu lại kết quả.
+
+- [ ] **Task 3.5: Xây dựng danh sách file mẫu kiểm toán**
+  - [ ] Tạo giao diện liệt kê các file mẫu kiểm toán có sẵn.
+  - [ ] Cho phép người dùng mở, tải về hoặc cập nhật file mẫu trực tiếp từ ứng dụng.
+
+## Module 4: Phát Hành & Báo Cáo
+
+- [ ] **Task 4.1: Tích hợp chức năng Tổng hợp báo cáo**
+  - [ ] Xây dựng giao diện tổng hợp thông tin từ biểu mẫu (B410) để tạo báo cáo kiểm toán.
+  - [ ] Triển khai xuất báo cáo ra file Excel hoặc PDF.
+
+- [ ] **Task 4.2: Tích hợp chức năng Soạn thảo thư giải trình**
+  - [ ] Tạo giao diện cho biểu mẫu B440 để nhập nội dung thư giải trình.
+  - [ ] Triển khai chức năng lưu và xuất file thư giải trình.
+
+## Module 5: Kiểm Tra & Hỗ Trợ Tổng Quan
+
+- [ ] **Task 5.1: Xây dựng Dashboard hiển thị tiến độ Job**
+  - [ ] Hiển thị trạng thái hoàn thành của từng biểu mẫu (Chưa làm, Đang làm, Hoàn thành).
+  - [ ] Cập nhật tự động tiến độ và cảnh báo nếu có biểu mẫu chưa hoàn thành.
+
+- [ ] **Task 5.2: Triển khai chức năng lưu log và theo dõi lỗi**
+  - [ ] Ghi nhận các thao tác người dùng và trạng thái lưu trữ dữ liệu.
+  - [ ] Hiển thị log hoặc thông báo lỗi khi phát sinh sự cố.
+
+---
+
+*Lưu ý:*
+- Mỗi task cần có tài liệu hướng dẫn chi tiết (nếu cần), các unit test tương ứng và cập nhật checklist ngay sau khi hoàn thành.
+- Các task được sắp xếp theo thứ tự phụ thuộc, đảm bảo rằng các chức năng cơ bản (Job Management, Audit Forms) được triển khai trước khi tích hợp các tiện ích và chức năng báo cáo.

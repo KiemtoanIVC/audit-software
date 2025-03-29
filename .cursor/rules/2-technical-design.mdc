@@ -1,0 +1,133 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Technical Design Documentation: Chương Trình Kiểm Toán
+
+## 1. Overview
+
+Chương trình kiểm toán nhằm hỗ trợ quá trình kiểm soát khâu đầu ra của quy trình kiểm toán, đảm bảo rằng các kiểm toán viên (KTV) đã hoàn thiện đầy đủ hồ sơ theo danh sách quy định trước khi phát hành báo cáo kiểm toán chính thức. Ứng dụng được xây dựng trên nền tảng Python và PyQt6 với mục tiêu:
+- Quản lý các job kiểm toán (tạo, mở, lưu trữ thông tin).
+- Cung cấp các biểu mẫu kiểm toán theo từng giai đoạn: Lập kế hoạch, Thực hiện, Phát hành báo cáo và Đề nghị soát xét.
+- Hỗ trợ các tiện ích phụ trợ (load dữ liệu XML, chọn mẫu kiểm toán, tính khấu hao TSCĐ, trích xuất dữ liệu từ PDF).
+
+## 2. Requirements
+
+### 2.1 Functional Requirements
+- **Quản lý Job Kiểm Toán:**
+  - Cho phép tạo job mới với thông tin ban đầu (Tên khách hàng, Số hợp đồng, Ngày hợp đồng, Kỳ kiểm toán, Ngành nghề).
+  - Cho phép mở job đã tồn tại và tải lại thông tin đã lưu.
+  - Tự động tạo cấu trúc thư mục lưu trữ (ví dụ: thư mục “Mẫu biểu”, “Dữ liệu”, “Bằng chứng”) trên hệ thống file cục bộ.
+- **Mẫu Biểu Kiểm Toán:**
+  - Cung cấp biểu mẫu nhập liệu cho các giai đoạn:
+    - Lập kế hoạch: Biểu mẫu A110, A120, A230, A260, A270, A271, A272.
+    - Thực hiện: Biểu mẫu A510, A710, A810 và lưu trữ bằng chứng kiểm toán.
+    - Phát hành báo cáo: Biểu mẫu B410 (tổng hợp kết quả) và B440 (thư giải trình của Ban Giám đốc).
+    - Đề nghị soát xét: Form kiểm tra trạng thái các biểu mẫu; chỉ cho phép gửi nếu tất cả đều hoàn thành.
+- **Tiện Ích Hỗ Trợ:**
+  - Load dữ liệu từ file XML có cấu trúc cố định (BCTC, bảng kê chứng từ).
+  - Tính toán, chọn mẫu kiểm toán dựa trên tham số nhập vào.
+  - Tính toán khấu hao tài sản cố định.
+  - Trích xuất dữ liệu từ PDF (ví dụ: C12) sang Excel.
+  - Quản lý danh sách file mẫu kiểm toán để người dùng dễ truy cập.
+
+### 2.2 Non-Functional Requirements
+- **Hiệu năng:** Ứng dụng phản hồi nhanh trên môi trường desktop, với khối lượng dữ liệu vừa phải (file Excel, XML, PDF).
+- **Bảo trì:** Kiến trúc phân tầng rõ ràng, dễ mở rộng và bảo trì.
+- **Giao diện người dùng:** Giao diện trực quan, dễ sử dụng với các tab chức năng rõ ràng được xây dựng bằng PyQt6.
+- **Độ tin cậy:** Cơ chế lưu trữ và kiểm tra trạng thái biểu mẫu đảm bảo dữ liệu không bị mất hoặc ghi đè.
+- **Đa nhiệm:** Hỗ trợ làm việc đồng thời của nhiều kiểm toán viên trên cùng một hệ thống file cục bộ (đơn giản).
+
+## 3. Technical Design
+
+### 3.1. Data Model & File Storage
+
+- **Job Kiểm Toán:**
+  - Mỗi job được lưu trữ trong một thư mục riêng với cấu trúc con:
+    - **MauBieu:** Lưu các biểu mẫu đã điền.
+    - **DuLieu:** Lưu các file dữ liệu (Excel, XML, PDF sau khi trích xuất).
+    - **BangChung:** Lưu các tài liệu, bằng chứng kiểm toán (hợp đồng, hóa đơn, biên bản…).
+- **Biểu Mẫu Kiểm Toán:**
+  - Mỗi biểu mẫu được lưu dưới dạng file dữ liệu (ví dụ: file JSON, XML hoặc lưu trực tiếp trong cơ sở dữ liệu file).
+  - Các trạng thái của biểu mẫu: "Chưa làm", "Đang làm", "Hoàn thành" sẽ được lưu kèm thông tin của job.
+
+### 3.2. Application Layer & Business Logic
+
+- **Modules Chính:**
+  - **Job Management Module:**
+    - Xây dựng giao diện để tạo, mở job, lưu thông tin ban đầu.
+    - Tạo cấu trúc thư mục tự động khi tạo job.
+  - **Audit Forms Module:**
+    - Tạo form nhập liệu cho từng biểu mẫu kiểm toán (theo các giai đoạn: Lập kế hoạch, Thực hiện, Phát hành báo cáo, Đề nghị soát xét).
+    - Cơ chế lưu, kiểm tra trạng thái biểu mẫu.
+  - **Utilities Module:**
+    - Xử lý load dữ liệu XML.
+    - Tính toán khấu hao TSCĐ.
+    - Trích xuất dữ liệu từ PDF sang Excel.
+    - Lựa chọn mẫu kiểm toán dựa trên tham số (ví dụ: khoảng cách mẫu, ngưỡng sai sót).
+
+- **Logic Flow:**
+  1. **Job Creation & Management:** Người dùng tạo hoặc mở job → Hệ thống tạo/đọc cấu trúc thư mục và thông tin job.
+  2. **Biểu Mẫu Kiểm Toán:** Kiểm toán viên điền thông tin vào các biểu mẫu tương ứng với từng giai đoạn → Lưu trạng thái biểu mẫu.
+  3. **Tiện Ích Hỗ Trợ:** Người dùng sử dụng tiện ích để load, tính toán và xử lý dữ liệu, cập nhật kết quả vào các biểu mẫu.
+  4. **Kiểm Tra & Soát Xét:** Hệ thống kiểm tra trạng thái của tất cả các biểu mẫu → Nếu đầy đủ, cho phép gửi đề nghị soát xét.
+  5. **Phát Hành Báo Cáo:** Tổng hợp kết quả từ biểu mẫu → Xuất báo cáo (Excel/PDF) và lưu trữ báo cáo cuối cùng.
+
+### 3.3. UI Design
+
+- **Giao diện chính (MainWindow):**
+  - Sử dụng PyQt6 với giao diện tab, mỗi tab ứng với một module hoặc giai đoạn:
+    - Tab 1: Tạo/Mở Job.
+    - Tab 2: Mẫu Biểu Kiểm Toán (các biểu mẫu Lập kế hoạch).
+    - Tab 3: Mẫu Biểu Kiểm Toán (Thực hiện).
+    - Tab 4: Mẫu Biểu Kiểm Toán (Phát hành & Đề nghị soát xét).
+    - Tab 5: Tiện Ích Hỗ Trợ.
+- **Form Components:**
+  - Các widget nhập liệu, checkbox, combobox, nút “Lưu”, “Chỉnh sửa” để xác định trạng thái biểu mẫu.
+  - Thanh trạng thái (Status Bar) hiển thị tiến độ hoàn thành của job.
+
+### 3.4. Dependencies & Integration
+
+- **Framework & Thư viện chính:**
+  - Python 3.x.
+  - PyQt6 cho giao diện người dùng.
+  - Pandas, openpyxl, xlsxwriter cho xử lý file Excel.
+  - Các thư viện xử lý XML (ví dụ: xml.etree.ElementTree) và PDF (ví dụ: PyPDF2, pdfplumber) nếu cần.
+- **Phụ thuộc khác:**
+  - Các thư viện tiêu chuẩn cho xử lý file (os, shutil, json).
+
+### 3.5. Security & Performance Considerations
+
+- **Bảo mật dữ liệu:**
+  - Đảm bảo các file dữ liệu được lưu trữ có định dạng và quyền truy cập hợp lý trên hệ thống file.
+- **Hiệu năng:**
+  - Tối ưu việc load và xử lý dữ liệu (ví dụ: sử dụng pandas cho các thao tác dữ liệu lớn).
+  - Đảm bảo giao diện PyQt6 phản hồi nhanh, tránh các thao tác đồng bộ lâu gây treo giao diện (sử dụng threading hoặc async nếu cần).
+
+## 4. Testing Plan
+
+- **Unit Testing:**
+  - Viết unit tests cho các module chính: Job Management, Audit Forms và Utilities.
+  - Sử dụng pytest để kiểm thử các hàm xử lý dữ liệu, lưu trữ file và logic kiểm tra trạng thái biểu mẫu.
+- **Integration Testing:**
+  - Kiểm tra giao diện PyQt6 kết hợp với các chức năng backend: tạo job, lưu và đọc biểu mẫu.
+- **User Acceptance Testing (UAT):**
+  - Thực hiện thử nghiệm với các kịch bản người dùng điển hình (tạo job, nhập liệu, kiểm tra trạng thái, xuất báo cáo) và thu thập phản hồi từ kiểm toán viên.
+
+## 5. Open Questions
+
+- Phạm vi của việc lưu trữ file: Lưu trữ dưới dạng file cục bộ có đáp ứng được yêu cầu đồng bộ cho nhóm kiểm toán hay cần tích hợp thêm cơ chế backup?
+- Cách định dạng và lưu trạng thái biểu mẫu: Sử dụng JSON hay một hệ thống cơ sở dữ liệu nhẹ (như SQLite) để lưu lại tiến độ và kết quả nhập liệu?
+- Mức độ tự động hóa kiểm tra hoàn thành của các biểu mẫu: Có cần xác nhận thủ công từ người dùng trước khi gửi đề nghị soát xét hay có thể tự động chuyển trạng thái?
+
+## 6. Alternatives Considered
+
+- **Sử dụng cơ sở dữ liệu SQLite:**  
+  - Đã xem xét việc lưu trữ thông tin job và biểu mẫu vào SQLite thay vì file hệ thống. Tuy nhiên, để đơn giản hóa triển khai ban đầu, lựa chọn lưu trữ dưới dạng file có cấu trúc thư mục được ưu tiên.
+- **Tích hợp Web-based UI:**  
+  - Một giải pháp web có thể cung cấp giao diện linh hoạt hơn. Nhưng với yêu cầu môi trường desktop và sử dụng PyQt6, giao diện desktop được lựa chọn để giảm thiểu phụ thuộc và dễ triển khai.
+
+---
+
+Với tài liệu thiết kế kỹ thuật này, đội ngũ phát triển sẽ có cái nhìn tổng quan về yêu cầu, kiến trúc, luồng xử lý và các điểm cần chú ý khi triển khai chương trình kiểm toán trên nền tảng Python và PyQt6.

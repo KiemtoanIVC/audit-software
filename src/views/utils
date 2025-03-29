@@ -1,0 +1,5 @@
+class XmlLoaderView(QWidget):
+    pass
+    
+class SampleSelectorView(QWidget):
+    pass 
