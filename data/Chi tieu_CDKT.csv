@@ -1,0 +1,116 @@
+﻿Chỉ tiêu;Mã chỉ tiêu;Cấp;Mã số
+A - TÀI SẢN NGẮN HẠN (100 = 110+ 120 + 130 + 140 + 150) ;<ct100>;2;100
+I. Tiền và các khoản tương đương tiền (110 = 111 + 112);<ct110>;3;110
+1. Tiền;<ct111>;4;111
+2. Các khoản tương đương tiền;<ct112>;4;112
+II. Đầu tư tài chính ngắn hạn (120 = 121 + 122 + 123);<ct120>;3;120
+1. Chứng khoán kinh doanh;<ct121>;4;121
+2. Dự phòng giảm giá chứng khoán kinh doanh (*) (2);<ct122>;4;122
+3. Đầu tư nắm giữ đến ngày đáo hạn;<ct123>;4;123
+III. Các khoản phải thu ngắn hạn (130 = 131 + 132 +…+ 137 + 139);<ct130>;3;130
+1. Phải thu ngắn hạn của khách hàng;<ct131>;4;131
+2. Trả trước cho người bán ngắn hạn;<ct132>;4;132
+3. Phải thu nội bộ ngắn hạn;<ct133>;4;133
+4. Phải thu theo tiến độ kế hoạch hợp đồng xây dựng;<ct134>;4;134
+5. Phải thu về cho vay ngắn hạn;<ct135>;4;135
+6. Phải thu ngắn hạn khác;<ct136>;4;136
+7. Dự phòng phải thu ngắn hạn khó đòi (*);<ct137>;4;137
+8. Tài sản thiếu chờ xử lý;<ct139>;4;139
+IV. Hàng tồn kho (140 = 141 + 149);<ct140>;3;140
+1. Hàng tồn kho;<ct141>;4;141
+2. Dự phòng giảm giá hàng tồn kho (*);<ct149>;4;149
+V. Tài sản ngắn hạn khác (150= 151 + 152 + …+ 155);<ct150>;3;150
+1. Chi phí trả trước ngắn hạn;<ct151>;4;151
+2. Thuế GTGT được khấu trừ;<ct152>;4;152
+3. Thuế và các khoản khác phải thu Nhà nước;<ct153>;4;153
+4. Giao dịch mua bán lại trái phiếu Chính phủ;<ct154>;4;154
+5. Tài sản ngắn hạn khác;<ct155>;4;155
+B - TÀI SẢN DÀI HẠN (200= 210 + 220 + 230 + 240 + 250 + 260);<ct200>;2;200
+I- Các khoản phải thu dài hạn (210 = 211 + 212 +….+ 216 + 219);<ct210>;3;210
+1. Phải thu dài hạn của khách hàng;<ct211>;4;211
+2. Trả trước cho người bán dài hạn;<ct212>;4;212
+3. Vốn kinh doanh ở đơn vị trực thuộc;<ct213>;4;213
+4. Phải thu nội bộ dài hạn;<ct214>;4;214
+5. Phải thu về cho vay dài hạn;<ct215>;4;215
+6. Phải thu dài hạn khác;<ct216>;4;216
+7. Dự phòng phải thu dài hạn khó đòi (*);<ct219>;4;219
+II. Tài sản cố định ( 220 = 221 + 224 + 227);<ct220>;3;220
+1. Tài sản cố định hữu hình (221 = 222 + 223);<ct221>;4;221
+#NAME?;<ct222>;5;222
+- Giá trị hao mòn luỹ kế (*);<ct223>;5;223
+2. Tài sản cố định thuê tài chính (224 = 225 + 226);<ct224>;4;224
+#NAME?;<ct225>;5;225
+- Giá trị hao mòn luỹ kế (*);<ct226>;5;226
+3. Tài sản cố định vô hình (227 = 228 + 229);<ct227>;4;227
+#NAME?;<ct228>;5;228
+- Giá trị hao mòn luỹ kế (*);<ct229>;5;229
+III. Bất động sản đầu tư (230 = 231 + 232);<ct230>;4;230
+#NAME?;<ct231>;5;231
+- Giá trị hao mòn lũy kế (*);<ct232>;5;232
+IV. Tài sản dang dở dài hạn (240 = 241 + 242);<ct240>;3;240
+1. Chi phí sản xuất, kinh doanh dở dang dài hạn;<ct241>;4;241
+2. Chi phí xây dựng cơ bản dở dang;<ct242>;4;242
+V. Đầu tư tài chính dài hạn (250 = 251 + …+ 255);<ct250>;3;250
+1. Đầu tư vào công ty con;<ct251>;4;251
+2. Đầu tư vào công ty liên kết, liên doanh;<ct252>;4;252
+3. Đầu tư khác vào đơn vị khác;<ct253>;4;253
+4. Dự phòng đầu tư tài chính dài hạn (*);<ct254>;4;254
+5. Đầu tư nắm giữ đến ngày đáo hạn;<ct255>;4;255
+V. Tài sản dài hạn khác (260 = 261 + 262 + 263 + 268);<ct260>;3;260
+1. Chi phí trả trước dài hạn;<ct261>;4;261
+2. Tài sản thuế thu nhập hoãn lại;<ct262>;4;262
+3. Thiết bị, vật tư, phụ tùng thay thế dài hạn;<ct263>;4;263
+4. Tài sản dài hạn khác;<ct268>;4;268
+TỔNG CỘNG TÀI SẢN (270 = 100 + 200);<ct270>;1;270
+C - NỢ PHẢI TRẢ (300= 310 + 330);<ct300>;2;300
+I. Nợ ngắn hạn (310 = 311 + 312 +…+ 323 + 324);<ct310>;3;310
+1. Phải trả người bán ngắn hạn;<ct311>;4;311
+2. Người mua trả tiền trước ngắn hạn;<ct312>;4;312
+3. Thuế và các khoản phải nộp Nhà nước;<ct313>;4;313
+4. Phải trả người lao động;<ct314>;4;314
+5. Chi phí phải trả ngắn hạn;<ct315>;4;315
+6. Phải trả nội bộ ngắn hạn;<ct316>;4;316
+7. Phải trả theo tiến độ kế hoạch hợp đồng xây dựng;<ct317>;4;317
+8. Doanh thu chưa thực hiện ngắn hạn;<ct318>;4;318
+9. Phải trả ngắn hạn khác;<ct319>;4;319
+10. Vay và nợ thuê tài chính ngắn hạn;<ct320>;4;320
+11. Dự phòng phải trả ngắn hạn;<ct321>;4;321
+12. Quỹ khen thưởng, phúc lợi;<ct322>;4;322
+13. Quỹ bình ổn giá;<ct323>;4;323
+14. Giao dịch mua bán lại trái phiếu Chính phủ;<ct324>;4;324
+II. Nợ dài hạn (330 = 331 + 332 +…+ 342 + 343);<ct330>;3;330
+1. Phải trả người bán dài hạn;<ct331>;4;331
+2. Người mua trả tiền trước dài hạn;<ct332>;4;332
+3. Chi phí phải trả dài hạn;<ct333>;4;333
+4. Phải trả nội bộ về vốn kinh doanh;<ct334>;4;334
+5. Phải trả nội bộ dài hạn;<ct335>;4;335
+6. Doanh thu chưa thực hiện dài hạn;<ct336>;4;336
+7. Phải trả dài hạn khác;<ct337>;4;337
+8. Vay và nợ thuê tài chính dài hạn;<ct338>;4;338
+9. Trái phiếu chuyển đổi;<ct339>;4;339
+10. Cổ phiếu ưu đãi;<ct340>;4;340
+11. Thuế thu nhập hoãn lại phải trả;<ct341>;4;341
+12. Dự phòng phải trả dài hạn;<ct342>;4;342
+13. Quỹ phát triển khoa học và công nghệ;<ct343>;4;343
+D - VỐN CHỦ SỞ HỮU (400 = 410 + 430);<ct400>;2;400
+I. Vốn chủ sở hữu (410 = 411 + 412 +…+ 421 + 422);<ct410>;3;410
+1. Vốn góp của chủ sở hữu (411 = 411a + 411b);<ct411>;4;411
+#NAME?;<ct411a>;5;411a
+#NAME?;<ct411b>;5;411b
+2. Thặng dư vốn cổ phần;<ct412>;4;412
+3. Quyền chọn chuyển đổi trái phiếu;<ct413>;4;413
+4. Vốn khác của chủ sở hữu;<ct414>;4;414
+5. Cổ phiếu quỹ (*);<ct415>;4;415
+6. Chênh lệch đánh giá lại tài sản;<ct416>;4;416
+7. Chênh lệch tỷ giá hối đoái;<ct417>;4;417
+8. Quỹ đầu tư phát triển;<ct418>;4;418
+9. Quỹ hỗ trợ sắp xếp doanh nghiệp;<ct419>;4;419
+10. Quỹ khác thuộc vốn chủ sở hữu;<ct420>;4;420
+11. Lợi nhuận sau thuế chưa phân phối (421 =421a + 421b);<ct421>;4;421
+#NAME?;<ct421a>;5;421a
+#NAME?;<ct421b>;5;421b
+12. Nguồn vốn đầu tư XDCB;<ct422>;4;422
+II. Nguồn kinh phí và quỹ khác (430 = 431 + 432);<ct430>;3;430
+1. Nguồn kinh phí;<ct431>;4;431
+2. Nguồn kinh phí đã hình thành TSCĐ;<ct432>;4;432
+TỔNG CỘNG NGUỒN VỐN (440 = 300 + 400);<ct440>;1;440

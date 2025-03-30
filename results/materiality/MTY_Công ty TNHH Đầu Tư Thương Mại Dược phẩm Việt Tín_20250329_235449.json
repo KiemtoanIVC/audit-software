@@ -1,0 +1,18 @@
+{
+  "company_name": "Công ty TNHH Đầu Tư Thương Mại Dược phẩm Việt Tín",
+  "tax_code": "0106706733",
+  "calculation_date": "2025-03-29T23:54:49.439456",
+  "users": [
+    "Cổ đông",
+    "Cơ quan thuế"
+  ],
+  "benchmark_type": "Doanh thu",
+  "benchmark_value": 255054770459.0,
+  "audit_year": "Năm đầu tiên",
+  "risk_level": "Thấp",
+  "percentage": 0.6,
+  "overall_materiality": 1530328622.754,
+  "performance_materiality": 1147746467.0655,
+  "threshold": 76516431.1377,
+  "explanation": "\n1. Xác định người sử dụng BCTC:\n- Người sử dụng chính: Cổ đông, Cơ quan thuế\n\n2. Lựa chọn tiêu chí:\n- Tiêu chí: Doanh thu\n- Giá trị: 255,054,770,459 VND\n- Tỷ lệ áp dụng: 0.6%\n\n3. Kết quả tính toán:\n- Mức trọng yếu tổng thể: 1,530,328,623 VND\n- Mức trọng yếu thực hiện: 1,147,746,467 VND\n- Ngưỡng sai sót không đáng kể: 76,516,431 VND\n\n4. Giải thích:\n- MTY thực hiện được xác định bằng 75% MTY tổng thể\n- Ngưỡng sai sót không đáng kể được xác định bằng 5% MTY tổng thể\n"
+}

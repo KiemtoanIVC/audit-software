@@ -1,47 +1,39 @@
 from PyQt6.QtWidgets import (QWidget, QVBoxLayout, QHBoxLayout, QGroupBox,
-                           QPushButton, QLabel, QTableWidget, QTableWidgetItem)
+                           QPushButton, QLabel, QTableWidget,
+                           QTableWidgetItem, QMessageBox)
 from PyQt6.QtCore import Qt
-from ..utils.styles import AppTheme
 from .materiality_dialog import MaterialityDialog
+from ..utils.styles import AppTheme
 
-class FormView(QWidget):
+class BCTCView(QWidget):
     def __init__(self):
         super().__init__()
+        self.processor = None
         self.current_job = None
         self.setup_ui()
-        
+
     def setup_ui(self):
         layout = QVBoxLayout()
-        layout.setSpacing(AppTheme.SPACING_MEDIUM)
-
-        # Tạo group box cho thông tin BCTC
-        bctc_group = QGroupBox("Thông tin BCTC")
-        bctc_layout = QVBoxLayout()
         
         # Bảng thông tin BCTC
         self.bctc_info_table = QTableWidget()
         self.bctc_info_table.setColumnCount(2)
         self.bctc_info_table.setHorizontalHeaderLabels(["Thông tin", "Giá trị"])
         self.bctc_info_table.horizontalHeader().setStretchLastSection(True)
-        bctc_layout.addWidget(self.bctc_info_table)
         
-        bctc_group.setLayout(bctc_layout)
-        layout.addWidget(bctc_group)
-
         # Button tính MTY
         self.calc_mty_btn = QPushButton("Tính mức trọng yếu")
         self.calc_mty_btn.setStyleSheet(AppTheme.BUTTON_PRIMARY_STYLE)
         self.calc_mty_btn.clicked.connect(self.show_materiality_dialog)
         self.calc_mty_btn.setEnabled(False)
         
-        # Thêm các widget vào layout chính
+        layout.addWidget(self.bctc_info_table)
         layout.addWidget(self.calc_mty_btn)
-        layout.addStretch()
-        
         self.setLayout(layout)
 
     def set_bctc_data(self, processor, job_data):
-        """Nhận dữ liệu BCTC từ job"""
+        """Nhận dữ liệu BCTC từ JobView"""
+        self.processor = processor
         self.current_job = job_data
         
         # Cập nhật giao diện
@@ -69,9 +61,36 @@ class FormView(QWidget):
 
     def show_materiality_dialog(self):
         """Hiển thị dialog tính MTY"""
-        if not self.current_job or not self.current_job.get('bctc_file'):
+        if not self.current_job or not self.current_job.get('key_metrics'):
+            QMessageBox.warning(self, "Cảnh báo", "Không có dữ liệu BCTC!")
             return
             
         dialog = MaterialityDialog(self)
+        # Truyền dữ liệu BCTC cho dialog
         dialog.set_bctc_data(self.current_job)
         dialog.exec()
+
+    def update_financial_data(self, processor):
+        """Cập nhật bảng dữ liệu tài chính"""
+        if not processor:
+            return
+            
+        metrics = processor.get_key_metrics()
+        if not metrics:
+            return
+            
+        # Hiển thị các chỉ tiêu quan trọng
+        data_rows = [
+            ('total_assets', 'Tổng tài sản'),
+            ('equity', 'Vốn chủ sở hữu'),
+            ('revenue', 'Doanh thu'),
+            ('profit_before_tax', 'Lợi nhuận trước thuế'),
+            ('total_expenses', 'Tổng chi phí')
+        ]
+        
+        self.data_table.setRowCount(len(data_rows))
+        for row, (key, name) in enumerate(data_rows):
+            value = metrics.get(key, 0)
+            self.data_table.setItem(row, 0, QTableWidgetItem(key))
+            self.data_table.setItem(row, 1, QTableWidgetItem(name))
+            self.data_table.setItem(row, 2, QTableWidgetItem(f"{value:,.0f}")) 
