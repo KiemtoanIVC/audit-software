@@ -141,8 +141,8 @@ class JobCreationDialog(QDialog):
         }
 
 class JobView(QWidget):
-    # Thêm signal
     bctc_loaded = pyqtSignal()
+    job_loaded = pyqtSignal(dict)
     
     def __init__(self):
         super().__init__()
@@ -287,6 +287,8 @@ class JobView(QWidget):
                 
                 # Lưu đường dẫn job vào config chung
                 ConfigManager.save_last_job(str(job_path))
+                
+                self.job_loaded.emit(self.current_job)
                 
                 QMessageBox.information(self, "Thành công", "Đã mở job thành công!")
                 

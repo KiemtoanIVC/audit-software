@@ -116,4 +116,20 @@ class JobCreator:
             return job_data
             
         except Exception as e:
-            raise Exception(f"Lỗi khi mở job: {str(e)}") 
+            raise Exception(f"Lỗi khi mở job: {str(e)}")
+
+    @staticmethod
+    def save_job_config(job_data):
+        """Lưu thông tin cấu hình job ra file"""
+        if not job_data or 'path' not in job_data:
+            raise ValueError("Thông tin job không hợp lệ")
+        
+        job_path = job_data['path']
+        config_file = os.path.join(job_path, 'job_config.json')
+        
+        # Cập nhật thời gian chỉnh sửa
+        job_data['updated_at'] = datetime.now().isoformat()
+        
+        # Lưu file
+        with open(config_file, 'w', encoding='utf-8') as f:
+            json.dump(job_data, f, ensure_ascii=False, indent=2) 
